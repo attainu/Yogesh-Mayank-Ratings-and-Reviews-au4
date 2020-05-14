@@ -9,11 +9,13 @@ const opts = {
 }
 
 const checkUserId = async (jwt_payload) => {
-    let admin1 = await Admins.findOne({_id: jwt_payload.userId});
-    let user1 = await Users.findOne({_id: jwt_payload.userId});
+    let admin1 = await Admins.findOne({_id: jwt_payload._id});
+    let user1 = await Users.findOne({_id: jwt_payload._id});
     if (user1){
+        // console.log(user1);
         return user1;
     } else if (admin1){
+        // console.log(admin1);
         return admin1
     } else {
         return null;
@@ -21,19 +23,20 @@ const checkUserId = async (jwt_payload) => {
 }
 
 const strategy = new Strategy(opts, async (jwt_payload, done) => {
-    let user = checkUserId(jwt_payload)
-        .then(() =>{
-            if(user){
-                // console.log(user);
-                // console.log(jwt_payload);
-                return done(null, user);
-            } else {
-                return done(null, false);
-            }
-        }).catch(err=> {
-            console.log(err);
-            return done(err, false);
-        });
+    try {
+        let user = await checkUserId(jwt_payload)
+        if(user){
+            console.log(user);
+            // console.log(jwt_payload);
+            return done(null, user);
+        } else {
+            return done(null, false);
+        }
+    } catch (err) {
+        
+        console.log(err);
+        return done(err, false);
+    }    
 })
 
 module.exports = {
