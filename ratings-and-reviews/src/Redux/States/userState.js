@@ -25,6 +25,7 @@ let userState = {
         userIsAdmin: false,
         loginRedirect: "",
         logoutRedirect: "",
+        userRegistered: null,
         registrationRedirect: ""
     },
     headers: {
@@ -51,6 +52,8 @@ let userState = {
         oldPassword: { message: "", success: null },
         newPassword : { message: "", success: null },
         repeatPassword: { message: "", success: null },
+        registration: {error: null, message: null, success: null},
+        login: { message: "", success: null}
     },
     users: [],
     usersCopy: [],
