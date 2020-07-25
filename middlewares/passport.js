@@ -26,14 +26,13 @@ const strategy = new Strategy(opts, async (jwt_payload, done) => {
     try {
         let user = await checkUserId(jwt_payload)
         if(user){
-            console.log(user);
+            // console.log(user);
             // console.log(jwt_payload);
             return done(null, user);
         } else {
             return done(null, false);
         }
     } catch (err) {
-        
         console.log(err);
         return done(err, false);
     }    
