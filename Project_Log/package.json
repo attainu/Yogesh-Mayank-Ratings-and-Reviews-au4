@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/yswarkare/Rating_And_Reviews_Website#readme",
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^8.2.0"
   }
 }
